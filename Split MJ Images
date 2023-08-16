@@ -1,0 +1,38 @@
+from PIL import Image
+import os
+
+output_folder = 'C:/.../Split'
+
+counter = 0
+
+arr = os.listdir('C:/.../Unsplit/08-May-2023-00-44-49')
+arr2 = []
+for i in arr:
+    a = "C:/.../Unsplit//08-May-2023-00-44-49/" + str(arr[counter])
+    counter += 1
+    arr2.append(a)
+    
+
+counter2 = 0
+
+for j in arr2:
+    im = Image.open(arr2[counter2])
+    # Get the width and height of the original image
+    width, height = im.size
+    # Calculate the middle points along the horizontal and vertical axes
+    mid_x = width // 2
+    mid_y = height // 2
+    # Split the image into four equal parts
+    top_left = im.crop((0, 0, mid_x, mid_y))
+    top_right = im.crop((mid_x, 0, width, mid_y))
+    bottom_left = im.crop((0, mid_y, mid_x, height))
+    bottom_right = im.crop((mid_x, mid_y, width, height))
+    
+    file_name = arr[counter2]
+    
+    top_left.save(os.path.join(output_folder, file_name + "_top_left.jpg"))
+    top_right.save(os.path.join(output_folder, file_name + "_top_right.jpg"))
+    bottom_left.save(os.path.join(output_folder, file_name + "_bottom_left.jpg"))
+    bottom_right.save(os.path.join(output_folder, file_name + "_bottom_right.jpg"))
+    
+    counter2 += 1
