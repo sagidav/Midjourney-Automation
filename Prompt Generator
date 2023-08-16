@@ -1,0 +1,54 @@
+import random
+from datetime import datetime
+
+now = datetime.now()
+
+f = open("generator.txt", "a")
+
+f.write('\n')
+str_1 = "-------" + str(now) + "-------" + "\n"
+f.write('\n')
+f.write(str_1)
+
+counter = 200
+
+style = "--s "
+style_num = random.choice(range(0, 1000, 10))
+chaos = "--chaos "
+chaos_num = random.choice(range(0, 100, 5))
+
+a = ["cartoon baby", "cartoon dancing", "happy","cartoon patchy","cartoon","loony toons style"]
+b = ["outline only","solid outline, patchy infill", "outline sketch","simple few details"]
+c= ["uncolored"]
+coma = [", "]
+animal = ["lion","bear","unicorn","shark","deer",'Dog','Cow' ,'Cat', 'Horse', 'Donkey',	'Tiger', 'Lion', 'Panther',
+'Leopard', 'Cheetah', 'Bear', 'Elephant', 'Polar bear',	'Turtle', 'Tortoise', 'Crocodile',
+'Rabbit', 'Porcupine', 'Hare', 'Hen', 'Pigeon',	'Albatross', 'Crow', 'Fish',
+'Dolphin', 'Frog', 'Whale', 'Alligator',
+'Eagle', 'Flying squirrel', 'Ostrich', 'Fox',
+'Goat', 'Jackal', 'Emu'	'Armadillo',
+'Eel', 'Goose', 'Arctic fox', 'Wolf',
+'Beagle', 'Gorilla', 'Chimpanzee', 'Monkey',
+'Beaver', 'Orangutan', 'Antelope',	'Bat',
+'Badger', 'Giraffe', 'Hermit Crab',	'Giant Panda',
+'Hamster', 'Cobra', 'Hammerhead shark', 'Camel',
+'Hawk',	'Deer', 'Chameleon',	'Hippopotamus',
+'Jaguar', 'Chihuahua', 'King Cobra',	'Ibex',
+'Lizard', 'Koala', 'Kangaroo',	'Iguana',
+'Llama', 'Chinchillas',	'Dodo',	'Jellyfish',
+'Rhinoceros', 'Hedgehog', 'Zebra',	'Possum',
+'Wombat','Bison', 'Bull', 'Buffalo',
+'Sheep', 'Meerkat', 'Mouse',	'Otter',
+'Sloth', 'Owl', 'Vulture',	'Flamingo',
+'Racoon', 'Mole', 'Duck',	'Swan',
+'Lynx',	'Monitor' ,'lizard',	'Elk',	'Boar',
+'Lemur', 'Mule', 'Baboon',	'Mammoth',
+'Blue', 'whale', 'Rat',	'Snake', 'Peacock']
+
+for i in range(counter):
+    sen = str(random.choice(a)) + " " + str(random.choice(animal)) + coma[0] + str(random.choice(b)) + ', ' + c[0] + " --s " + str(style_num) + " --chaos " + str(chaos_num)
+    f.write(str(sen))
+    f.write("\n")
+
+f.close()
+
