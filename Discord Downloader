@@ -1,0 +1,60 @@
+import os
+from discord.ext import commands
+from dotenv import load_dotenv
+import random
+import time
+import discord
+import requests
+from datetime import datetime
+
+x_time = datetime.now().time()
+y_time = datetime.now()
+z_time = str(y_time.strftime("%d-%B-%Y")) + '-' + str(x_time.strftime("%H-%M-%S"))
+
+load_dotenv()
+TOKEN = os.getenv('...')
+GUILD = os.getenv("...")
+
+client = commands.Bot(command_prefix="*", intents=discord.Intents.all())
+
+
+@client.event
+async def on_ready():
+    for guild in client.guilds:
+        if guild.name == GUILD:
+            break
+
+    print(
+        f'{client.user} is connected to the following guild:\n'
+        f'{guild.name}(id: {guild.id})'
+    )
+    
+    members = '\n - '.join([member.name for member in guild.members])
+    print(f'Guild Members:\n - {members}')
+    
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    
+    print(message)
+    if message.content.lower() == 'download':
+        
+        folder_name = str(z_time)
+        new_folder = os.path.join('C:/.../Unsplit/', folder_name)
+        os.makedirs(new_folder)
+        
+        async for msg in message.channel.history(limit=220):
+            attachments = msg.attachments
+            for attachment in attachments:
+                if attachment.filename.endswith('.png') or attachment.filename.endswith('.jpg'): # Check if the attachment is an image
+                    url = attachment.url
+                    filename = os.path.basename(url)
+                    
+                    folder = 'C:/.../Unsplit' # Replace with the name of the folder you want to save images to
+
+                    with open(os.path.join(new_folder, filename), 'wb') as f:
+                        await attachment.save(f)
+                    
+                    
+client.run('...')
